@@ -32,4 +32,10 @@ public interface RequestService {
      * @param request
      */
     void updateRequest(Request request);
+
+    /**
+     * Method to delete Request by id using mongo-db repository.
+     * @param id
+     */
+    void deleteRequestById(int id);
 }

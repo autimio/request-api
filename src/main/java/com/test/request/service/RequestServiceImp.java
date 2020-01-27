@@ -36,4 +36,10 @@ public class RequestServiceImp implements RequestService {
     public void updateRequest(Request request) {
         requestDao.save(request);
     }
+
+    @Override
+    public void deleteRequestById(int id) {
+        requestDao.deleteById(id);
+    }
+
 }

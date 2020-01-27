@@ -60,4 +60,15 @@ public class RequestController {
         requestService.updateRequest(request);
         return "Request record for request-id=" + id + " updated.";
     }
+
+    /**
+     * Method to delete Request by id.
+     * @param id
+     * @return
+     */
+    @DeleteMapping(value= "/delete/{request-id}")
+    public String delete(@PathVariable(value= "request-id") int id) {
+        requestService.deleteRequestById(id);
+        return "Request record for resquest-id=" + id + " deleted.";
+    }
 }
