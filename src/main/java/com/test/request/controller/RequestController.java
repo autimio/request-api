@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(value="/api/request")
@@ -28,8 +29,22 @@ public class RequestController {
         return "Request records created.";
     }
 
+    /**
+     * Method to fetch all Requests from the db.
+     * @return
+     */
     @GetMapping(value="/getall")
     public Collection<Request> getAll() {
         return requestService.getAllRequests();
+    }
+
+    /**
+     * Method to fetch Request by id.
+     * @param id
+     * @return
+     */
+    @GetMapping(value= "/getbyid/{request-id}")
+    public Optional<Request> getById(@PathVariable(value= "request-id") int id) {
+        return requestService.findRequestById(id);
     }
 }

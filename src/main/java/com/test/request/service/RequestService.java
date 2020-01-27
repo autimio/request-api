@@ -4,6 +4,7 @@ import com.test.request.model.Request;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 public interface RequestService {
 
@@ -18,4 +19,11 @@ public interface RequestService {
      * @return Collection
      */
     Collection<Request> getAllRequests();
+
+    /**
+     * Method to fetch Request by id using mongo-db repository.
+     * @param id
+     * @return
+     */
+    Optional<Request> findRequestById(int id);
 }

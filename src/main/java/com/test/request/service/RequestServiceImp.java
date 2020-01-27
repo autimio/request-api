@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class RequestServiceImp implements RequestService {
@@ -24,5 +25,10 @@ public class RequestServiceImp implements RequestService {
     @Override
     public Collection<Request> getAllRequests() {
         return requestDao.findAll();
+    }
+
+    @Override
+    public Optional<Request> findRequestById(int id) {
+        return requestDao.findById(id);
     }
 }
