@@ -47,4 +47,17 @@ public class RequestController {
     public Optional<Request> getById(@PathVariable(value= "request-id") int id) {
         return requestService.findRequestById(id);
     }
+
+    /**
+     * Method to update Request by id.
+     * @param id
+     * @param request
+     * @return
+     */
+    @PutMapping(value= "/update/{request-id}")
+    public String update(@PathVariable(value= "request-id") int id, @RequestBody Request request) {
+        request.setCode(id);
+        requestService.updateRequest(request);
+        return "Request record for request-id=" + id + " updated.";
+    }
 }

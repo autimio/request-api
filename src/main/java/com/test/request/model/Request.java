@@ -1,6 +1,5 @@
 package com.test.request.model;
 
-import jdk.nashorn.internal.objects.annotations.Getter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 

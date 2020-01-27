@@ -31,4 +31,9 @@ public class RequestServiceImp implements RequestService {
     public Optional<Request> findRequestById(int id) {
         return requestDao.findById(id);
     }
+
+    @Override
+    public void updateRequest(Request request) {
+        requestDao.save(request);
+    }
 }

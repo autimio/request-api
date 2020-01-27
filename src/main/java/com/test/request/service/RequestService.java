@@ -26,4 +26,10 @@ public interface RequestService {
      * @return
      */
     Optional<Request> findRequestById(int id);
+
+    /**
+     * Method to update Request by id using mongo-db repository.
+     * @param request
+     */
+    void updateRequest(Request request);
 }
