@@ -42,4 +42,9 @@ public class RequestServiceImp implements RequestService {
         requestDao.deleteById(id);
     }
 
+    @Override
+    public void deleteAllRequests() {
+        requestDao.deleteAll();
+    }
+
 }

@@ -38,4 +38,9 @@ public interface RequestService {
      * @param id
      */
     void deleteRequestById(int id);
+
+    /**
+     * Method to delete all Requests using mongo-db repository.
+     */
+    void deleteAllRequests();
 }

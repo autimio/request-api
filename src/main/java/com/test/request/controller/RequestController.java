@@ -71,4 +71,14 @@ public class RequestController {
         requestService.deleteRequestById(id);
         return "Request record for resquest-id=" + id + " deleted.";
     }
+
+    /**
+     * Method to delete all Requests from the db.
+     * @return
+     */
+    @DeleteMapping(value= "/deleteall")
+    public String deleteAll() {
+        requestService.deleteAllRequests();
+        return "All Requests records deleted.";
+    }
 }
