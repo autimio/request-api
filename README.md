@@ -31,16 +31,16 @@ POST: http://localhost:8080/api/request/create
 
 GET: http://localhost:8080/api/request/getall
 
-GET: http://localhost:8080/api/request/getbyid/<id>
+GET: http://localhost:8080/api/request/getbyid/{id}
 
-UPDATE: http://localhost:8080/api/request/update/<id>
+UPDATE: http://localhost:8080/api/request/update/{id}
 `{
      "type": 2,
      "description": "Teste update f...",
      "date": 1579982682
  }`
 
-DELETE: http://localhost:8080/api/request/delete/<id>
+DELETE: http://localhost:8080/api/request/delete/{id}
 
 DELETE: http://localhost:8080/api/request/deleteall
 
