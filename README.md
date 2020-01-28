@@ -1,11 +1,13 @@
 # Knowledge test in Spring Boot and MongoDB
 
 Development of a simple application using Spring Boot and MongoDB. 
-This small project was made due to a personal challenge, in order to get to know the mongoDB bank.
+This small project was made due to a personal challenge, in order to get to know the mongoDB.
 
 
 ## Endpoints
-POST: http://localhost:8080/api/request/create
+- POST: http://localhost:8080/api/request/create
+
+Example:
 
 `
 [
@@ -29,20 +31,23 @@ POST: http://localhost:8080/api/request/create
      }
  ]`
 
-GET: http://localhost:8080/api/request/getall
+- GET: http://localhost:8080/api/request/getall
 
-GET: http://localhost:8080/api/request/getbyid/{id}
+- GET: http://localhost:8080/api/request/getbyid/{id}
 
-UPDATE: http://localhost:8080/api/request/update/{id}
+- PUT: http://localhost:8080/api/request/update/{id}
+
+Example:
+
 `{
      "type": 2,
      "description": "Teste update f...",
      "date": 1579982682
  }`
 
-DELETE: http://localhost:8080/api/request/delete/{id}
+- DELETE: http://localhost:8080/api/request/delete/{id}
 
-DELETE: http://localhost:8080/api/request/deleteall
+- DELETE: http://localhost:8080/api/request/deleteall
 
 Technologies used: Java 8, MongoDB, Maven and Spring Boot. 
 
