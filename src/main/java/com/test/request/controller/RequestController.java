@@ -2,7 +2,10 @@ package com.test.request.controller;
 
 import com.test.request.model.Request;
 import com.test.request.service.RequestService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Collection;
 import java.util.List;
@@ -12,11 +15,8 @@ import java.util.Optional;
 @RequestMapping(value="/api/request")
 public class RequestController {
 
-    final RequestService requestService;
-
-    public RequestController(RequestService requestService) {
-        this.requestService = requestService;
-    }
+    @Autowired
+    RequestService requestService;
 
     /**
      * Method to save Requests in the db.
@@ -35,7 +35,16 @@ public class RequestController {
      */
     @GetMapping(value="/getall")
     public Collection<Request> getAll() {
-        return requestService.getAllRequests();
+        Collection<Request> requests = requestService.getAllRequests();
+
+        if (!requests.isEmpty()) {
+            return requests;
+        } else {
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND,
+                    "There are no requests in the database."
+            );
+        }
     }
 
     /**
@@ -44,21 +53,39 @@ public class RequestController {
      * @return
      */
     @GetMapping(value= "/getbyid/{request-id}")
-    public Optional<Request> getById(@PathVariable(value= "request-id") int id) {
-        return requestService.findRequestById(id);
+    public Optional<Request> getById(@PathVariable(value= "request-id") int id)  {
+        Optional<Request> request = requestService.findRequestById(id);
+
+        if (!request.isPresent()) {
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND,
+                    "The Request with the given ID [" + id + "] was not found!"
+            );
+        }
+
+        return request;
     }
 
     /**
      * Method to update Request by id.
      * @param id
-     * @param request
+     * @param requestBody
      * @return
      */
     @PutMapping(value= "/update/{request-id}")
-    public String update(@PathVariable(value= "request-id") int id, @RequestBody Request request) {
-        request.setCode(id);
-        requestService.updateRequest(request);
-        return "Request record for request-id=" + id + " updated.";
+    public String update(@PathVariable(value= "request-id") int id, @RequestBody Request requestBody) {
+        Optional<Request> request = requestService.findRequestById(id);
+
+        if (request.isPresent()) {
+            requestBody.setCode(id);
+            requestService.updateRequest(requestBody);
+            return "Request record for request-id=" + id + " updated.";
+        } else {
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND,
+                    "The request with the given ID [" + id + "] was not found, so it will not be possible to make the change!"
+            );
+        }
     }
 
     /**
@@ -68,8 +95,17 @@ public class RequestController {
      */
     @DeleteMapping(value= "/delete/{request-id}")
     public String delete(@PathVariable(value= "request-id") int id) {
-        requestService.deleteRequestById(id);
-        return "Request record for resquest-id=" + id + " deleted.";
+        Optional<Request> request = requestService.findRequestById(id);
+
+        if (request.isPresent()) {
+            requestService.deleteRequestById(id);
+            return "Request record for resquest-id=" + id + " deleted.";
+        } else {
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND,
+                    "The request with the given ID [" + id + "] was not found, so it will not be possible to delete!"
+            );
+        }
     }
 
     /**
